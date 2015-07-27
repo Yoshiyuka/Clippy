@@ -3,6 +3,12 @@ Clippy
 ]]
 
 local Clippy = CreateFrame("FRAME", "ClippyFrame")
+local words = {
+	"Apple",
+	"AC/DC",
+	"Frogger",
+	"Crystal Pepsi"
+}
 
 Clippy:RegisterEvent("CHAT_MSG");
 
@@ -15,7 +21,7 @@ Clippy:SetScript("OnEvent", eventHandler);
 function Clippy_ChatEdit_ParseText(text, send)
 	if(send == 1) then
 		local current_text = text:GetText();
-		local new_text = string.gsub(current_text, "{(.-)}", function(s) return "success" end)
+		local new_text = string.gsub(current_text, "{(.-)}", function(s) return words[math.random(#words)] end)
 		text:SetText(new_text)
 	end
 end
