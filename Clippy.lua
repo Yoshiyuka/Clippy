@@ -26,7 +26,7 @@ function Clippy_ChatEdit_ParseText(text, send)
 	end
 end
 function Clippy_SendChatMessage(text, chatType, languageIndex, channel)
-	message("clippy send chat message");
+	--message("clippy send chat message");
 end
 
 hooksecurefunc("ChatEdit_ParseText", Clippy_ChatEdit_ParseText)
