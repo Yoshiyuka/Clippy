@@ -14,7 +14,9 @@ Clippy:SetScript("OnEvent", eventHandler);
 
 function Clippy_ChatEdit_ParseText(text, send)
 	if(send == 1) then
-		text:SetText(text:GetText() .. " wooo");
+		local current_text = text:GetText();
+		local new_text = string.gsub(current_text, "{(.-)}", function(s) return "success" end)
+		text:SetText(new_text)
 	end
 end
 function Clippy_SendChatMessage(text, chatType, languageIndex, channel)
