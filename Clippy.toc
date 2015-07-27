@@ -1,21 +1,14 @@
 ﻿## Interface: 60200
+## Version: 0.1
 ## Title: Clippy
-## Notes: Customizable phrase auto-complete. 
-## Author: Yoshiyuka
-## Version: v0.1
-## DefaultState: enabled
-## X-Category: Map
-## X-Curse-Packaged-Version: v1.3.3
-## X-Curse-Project-Name: Clippy
-## X-Curse-Project-ID: clippy
-## X-Curse-Repository-ID: wow/clippy/mainline
-
-
-
+## Author: Customizable phrase auto-complete. 
+## Notes: No notes.
 ## SavedVariables: ClippyDB
+## OptionalDeps: Ace3
+## X-Embeds: Ace3
 
+embeds.xml
 
-# Core files
 Clippy.lua
 
 

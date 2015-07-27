@@ -1,33 +1,28 @@
-﻿--[[
-Clippy
-]]
+﻿local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "AceHook-3.0")
 
-local Clippy = CreateFrame("FRAME", "ClippyFrame")
-local words = {
-	"Apple",
-	"AC/DC",
-	"Frogger",
-	"Crystal Pepsi"
-}
-
-Clippy:RegisterEvent("CHAT_MSG");
-
-local function eventHandler(self, event, ...)
-	print("AN EVENT");
+function Clippy:OnInitialize()
+  Clippy:RegisterChatCommand("clippy", "Clippy")
 end
 
-Clippy:SetScript("OnEvent", eventHandler);
+function Clippy:OnEnable()
+    Clippy:SecureHook("ChatEdit_ParseText")
+end
 
-function Clippy_ChatEdit_ParseText(text, send)
+function Clippy:OnDisable()
+end
+
+function Clippy:ChatEdit_ParseText(chat, send)
 	if(send == 1) then
-		local current_text = text:GetText();
-		local new_text = string.gsub(current_text, "{(.-)}", function(s) return words[math.random(#words)] end)
-		text:SetText(new_text)
+		local old_text = chat:GetText()
+		local new_text = string.gsub(old_text, "{(.-)}", function(s) return self:ParseText(s) end)
+		chat:SetText(new_text)
 	end
 end
-function Clippy_SendChatMessage(text, chatType, languageIndex, channel)
-	--message("clippy send chat message");
+
+function Clippy:ParseText(text)
+	return "test"
 end
 
-hooksecurefunc("ChatEdit_ParseText", Clippy_ChatEdit_ParseText)
-hooksecurefunc("SendChatMessage", Clippy_SendChatMessage)
+function Clippy:Clippy()
+	print("hey")
+end
