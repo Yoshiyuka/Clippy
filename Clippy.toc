@@ -1,7 +1,7 @@
-## Interface: 50400
+## Interface: 60200
 ## Title: Clippy
-## Version: 1.0
-## Author: Erik
+## Version: 0.1
+## Author: Yoshiyuka
 
 embeds.xml
 

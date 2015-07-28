@@ -1,6 +1,9 @@
 local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0" );
 local AceGUI = LibStub("AceGUI-3.0")
 
+local ClippyFrame = AceGUI:Create("Window")
+local TabGroup = AceGUI:Create("TabGroup")
+
 local function DrawMainTab(container)
 	local desc = AceGUI:Create("Label")
 	desc:SetText("Main Tab")
@@ -25,12 +28,10 @@ local function SelectGroup(container, event, group)
 end
 
 local function InitializeClippyFrame()
-	ClippyFrame = AceGUI:Create("Window")
 	ClippyFrame:SetTitle("Clippy")
-	ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+	--ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
     ClippyFrame:SetLayout("Fill")
 
-    TabGroup = AceGUI:Create("TabGroup")
     TabGroup:SetLayout("Flow")
     TabGroup:SetTabs({ {text="Main Menu", value="main"}, {text="Substitutes", value="substitutes"}})
     TabGroup:SetCallback("OnGroupSelected", SelectGroup)
@@ -51,6 +52,7 @@ function Clippy:OnEnable()
 end
 
 function Clippy:OnDisable()
+	AceGUI:Release(ClippyFrame)
 end
 
 function Clippy:ChatEdit_ParseText(chat, send)
