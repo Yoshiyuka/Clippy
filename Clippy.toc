@@ -1,14 +1,8 @@
-﻿## Interface: 60200
-## Version: 0.1
+## Interface: 50400
 ## Title: Clippy
-## Author: Customizable phrase auto-complete. 
-## Notes: No notes.
-## SavedVariables: ClippyDB
-## OptionalDeps: Ace3
-## X-Embeds: Ace3
+## Version: 1.0
+## Author: Erik
 
 embeds.xml
 
 Clippy.lua
-
-

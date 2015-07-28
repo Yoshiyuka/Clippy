@@ -1,7 +1,49 @@
-﻿local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "AceHook-3.0")
+local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0" );
+local AceGUI = LibStub("AceGUI-3.0")
+
+local function DrawMainTab(container)
+	local desc = AceGUI:Create("Label")
+	desc:SetText("Main Tab")
+	desc:SetFullWidth(true)
+	container:AddChild(desc)
+end
+
+local function DrawSubstitutesTab(container)
+	local desc = AceGUI:Create("Label")
+	desc:SetText("Substitutes Tab")
+	desc:SetFullWidth(true)
+	container:AddChild(desc)
+end
+
+local function SelectGroup(container, event, group)
+	container:ReleaseChildren()
+	if group == "main" then
+		DrawMainTab(container)
+	elseif group == "substitutes" then
+		DrawSubstitutesTab(container)
+	end
+end
+
+local function InitializeClippyFrame()
+	ClippyFrame = AceGUI:Create("Window")
+	ClippyFrame:SetTitle("Clippy")
+	ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+    ClippyFrame:SetLayout("Fill")
+
+    TabGroup = AceGUI:Create("TabGroup")
+    TabGroup:SetLayout("Flow")
+    TabGroup:SetTabs({ {text="Main Menu", value="main"}, {text="Substitutes", value="substitutes"}})
+    TabGroup:SetCallback("OnGroupSelected", SelectGroup)
+    TabGroup:SelectTab("main")
+
+    ClippyFrame:AddChild(TabGroup)
+end
 
 function Clippy:OnInitialize()
-  Clippy:RegisterChatCommand("clippy", "Clippy")
+    --ClippyFrame:SetTitle("Clippy")
+    InitializeClippyFrame()
+    
+  	Clippy:RegisterChatCommand("clippy", "Clippy")
 end
 
 function Clippy:OnEnable()
@@ -24,5 +66,9 @@ function Clippy:ParseText(text)
 end
 
 function Clippy:Clippy()
-	print("hey")
+	if(ClippyFrame:IsVisible()) then
+		ClippyFrame:Hide()
+	else
+		ClippyFrame:Show()
+	end
 end
