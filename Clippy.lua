@@ -13,11 +13,53 @@ local function DrawSubstitutesTab(container)
 	desc:SetText("Substitutes Tab")
 	desc:SetFullWidth(true)
 
-	local KeywordFrame = AceGUI:Create("Dropdown")
-	KeywordFrame:SetList({ ["one"] = "Text One", ["two"] = "Text Two"})
-	KeywordFrame:SetValue("one")
+	--local KeywordFrame = AceGUI:Create("Dropdown")
+	--KeywordFrame:SetList({ ["one"] = "Text One", ["two"] = "Text Two"})
+	--KeywordFrame:SetValue("one")
+
+	local KeywordCluster = AceGUI:Create("InlineGroup")
+	local KeywordGroup = AceGUI:Create("SimpleGroup")
+	local SubstituteCluster = AceGUI:Create("InlineGroup")
+	local SubstituteGroup = AceGUI:Create("SimpleGroup")
+	local item1 = AceGUI:Create("InteractiveLabel")
+	local item2 = AceGUI:Create("InteractiveLabel")
+	KeywordCluster:SetLayout("Flow")
+	KeywordCluster:SetRelativeWidth(0.5)
+	KeywordCluster:SetFullHeight(true)
+	KeywordCluster:SetTitle("Keywords")
+	KeywordGroup:SetLayout("Flow")
+
+	SubstituteCluster:SetLayout("Flow")
+	SubstituteCluster:SetRelativeWidth(0.5)
+	SubstituteCluster:SetFullHeight(true)
+	SubstituteCluster:SetTitle("Substitute Phrases")
+	SubstituteGroup:SetLayout("Flow")
+
+	item1:SetText("Something")
+	KeywordGroup:AddChild(item1)
+	item2:SetText("Else")
+	SubstituteGroup:AddChild(item2)
+
+	local NewKeyword = AceGUI:Create("Button")
+	local NewPhrase = AceGUI:Create("Button")
+	NewKeyword:SetText("New")
+	NewKeyword:SetWidth(60)
+	NewKeyword:SetHeight(30)
+
+	NewKeyword:ClearAllPoints()
+	NewKeyword:SetPoint("CENTER", 200, 22)
+	NewPhrase:SetText("New")
+	NewPhrase:SetWidth(60)
+	NewPhrase:SetHeight(30)
 	
-	container:AddChild(KeywordFrame)
+	
+	KeywordCluster:AddChild(NewKeyword)
+	KeywordCluster:AddChild(KeywordGroup)
+	SubstituteCluster:AddChild(NewPhrase)
+	SubstituteCluster:AddChild(SubstituteGroup)
+
+	container:AddChild(KeywordCluster)
+	container:AddChild(SubstituteCluster)
 end
 
 local function SelectGroup(container, event, group)
