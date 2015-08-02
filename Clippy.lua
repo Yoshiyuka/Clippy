@@ -74,21 +74,57 @@ local function SelectGroup(container, event, group)
 	end
 end
 
+local function ClickMain()
+	ScrollShit:Hide()
+end
+local function ClickPhrase()
+	ScrollShit:Show()
+end
+
+
 local function InitializeClippyFrame()
-	ClippyFrame = AceGUI:Create("Window")
+	ClippyFrame = AceGUI:Create("Frame")
 	ClippyFrame:SetTitle("Clippy")
 	ClippyFrame:SetHeight(768)
 	ClippyFrame:SetWidth(1024)
 	--ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
-    ClippyFrame:SetLayout("Fill")
+    ClippyFrame:SetLayout("Flow")
 
-    local TabGroup = AceGUI:Create("TabGroup")
-    TabGroup:SetLayout("Flow")
-    TabGroup:SetTabs({ {text="Main Menu", value="main"}, {text="Substitutes", value="substitutes"}})
-    TabGroup:SetCallback("OnGroupSelected", SelectGroup)
-    TabGroup:SelectTab("main")
+	local MainButton = AceGUI:Create("Button")
+	MainButton:SetText("Main")
+	MainButton:SetWidth(100)
+	MainButton:SetHeight(30)
+	local PhraseButton = AceGUI:Create("Button")
+	PhraseButton:SetText("Phrases")
+	PhraseButton:SetWidth(100)
+	PhraseButton:SetHeight(30)
 
-    ClippyFrame:AddChild(TabGroup)
+	MainButton:ClearAllPoints()
+	MainButton:SetPoint("TOPLEFT", 10, 10)
+	PhraseButton:ClearAllPoints()
+	PhraseButton:SetPoint("LEFT")
+
+	MainButton:SetCallback("OnClick", ClickMain)
+	PhraseButton:SetCallback("OnClick", ClickPhrase)
+
+	ScrollShit = AceGUI:Create("Frame")
+	ScrollShit:SetLayout("Flow")
+	ScrollTest = AceGUI:Create("ScrollFrame")
+	ScrollTest:SetLayout("Fill")
+	ScrollShit:AddChild(ScrollTest)
+	ScrollShit:Hide()
+
+	ClippyFrame:AddChild(MainButton)
+	ClippyFrame:AddChild(PhraseButton)
+	ClippyFrame:AddChild(ScrollShit)
+
+    --local TabGroup = AceGUI:Create("TabGroup")
+    --TabGroup:SetLayout("Flow")
+    --TabGroup:SetTabs({ {text="Main Menu", value="main"}, {text="Substitutes", value="substitutes"}})
+    --TabGroup:SetCallback("OnGroupSelected", SelectGroup)
+    --TabGroup:SelectTab("main")
+
+    --ClippyFrame:AddChild(TabGroup)
 end
 
 function Clippy:OnInitialize()

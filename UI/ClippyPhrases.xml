@@ -58,13 +58,13 @@
 		<Anchors>
 			<Anchor point="TOPLEFT" x="192" y="-40" />
 		</Anchors>
-		<ButtonText name="$parentText" text="Phrases" />
+		<ButtonText text="Phrases" />
 	</Button>
 	<Button name="ClippyCoreButton" inherits="UIPanelButtonTemplate" text="Main">
 		<Size x="75" y="23" />
 		<Anchors>
 			<Anchor point="TOPLEFT" x="114" y="-40" />
 		</Anchors>
-		<ButtonText name="$parentText" text="Main" />
+		<ButtonText text="Main" />
 	</Button>
 </Ui>
