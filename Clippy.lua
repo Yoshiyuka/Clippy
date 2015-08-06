@@ -90,7 +90,7 @@ local function InitializeClippyFrame()
 	--ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
     ClippyFrame:SetLayout("Flow")
 
-	local MainButton = AceGUI:Create("Button")
+	local MainButton = AceGUI:Create("Button") --fails to find inherited node when calling create?
 	MainButton:SetText("Main")
 	MainButton:SetWidth(100)
 	MainButton:SetHeight(30)
@@ -108,7 +108,7 @@ local function InitializeClippyFrame()
 	PhraseButton:SetCallback("OnClick", ClickPhrase)
 
 	ScrollShit = AceGUI:Create("Frame")
-	ScrollShit:SetLayout("Flow")
+	ScrollShit:SetLayout("Fill")
 	ScrollTest = AceGUI:Create("ScrollFrame")
 	ScrollTest:SetLayout("Fill")
 	ScrollShit:AddChild(ScrollTest)
