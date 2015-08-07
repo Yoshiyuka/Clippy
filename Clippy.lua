@@ -75,10 +75,20 @@ local function SelectGroup(container, event, group)
 end
 
 local function ClickMain()
-	ScrollShit:Hide()
+	ScrollFrame:Hide()
 end
 local function ClickPhrase()
-	ScrollShit:Show()
+	ScrollFrame = AceGUI:Create("Frame")
+	ScrollFrame:SetTitle("Clippy")
+	ScrollFrame:SetHeight(768)
+	ScrollFrame:SetWidth(1024)
+	ScrollFrame:SetLayout("Flow")
+
+	ScrollGroup = AceGUI:Create("SimpleGroup")
+	ScrollFrame:AddChild(ScrollGroup)
+	ScrollGroup:SetLayout("Fill")
+	ScrollTest = AceGUI:Create("ScrollFrame")
+	ScrollGroup:AddChild(ScrollTest)
 end
 
 
@@ -90,7 +100,7 @@ local function InitializeClippyFrame()
 	--ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
     ClippyFrame:SetLayout("Flow")
 
-	local MainButton = AceGUI:Create("Button") --fails to find inherited node when calling create?
+	local MainButton = AceGUI:Create("Button") 
 	MainButton:SetText("Main")
 	MainButton:SetWidth(100)
 	MainButton:SetHeight(30)
@@ -107,16 +117,11 @@ local function InitializeClippyFrame()
 	MainButton:SetCallback("OnClick", ClickMain)
 	PhraseButton:SetCallback("OnClick", ClickPhrase)
 
-	ScrollShit = AceGUI:Create("Frame")
-	ScrollShit:SetLayout("Fill")
-	ScrollTest = AceGUI:Create("ScrollFrame")
-	ScrollTest:SetLayout("Fill")
-	ScrollShit:AddChild(ScrollTest)
-	ScrollShit:Hide()
-
+	
+	
 	ClippyFrame:AddChild(MainButton)
 	ClippyFrame:AddChild(PhraseButton)
-	ClippyFrame:AddChild(ScrollShit)
+	--ClippyFrame:AddChild(ScrollShit)
 
     --local TabGroup = AceGUI:Create("TabGroup")
     --TabGroup:SetLayout("Flow")
