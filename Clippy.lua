@@ -75,9 +75,9 @@ local function SelectGroup(container, event, group)
 end
 
 local function ClickMain()
-	ScrollFrame:Hide()
+	ScrollGroup:Hide()
 end
-local function ClickPhrase(frame)
+local function ClickPhrase()
 	--ScrollFrame = AceGUI:Create("Frame")
 	--ScrollFrame:SetTitle("Clippy")
 	--ScrollFrame:SetHeight(768)
@@ -85,7 +85,7 @@ local function ClickPhrase(frame)
 	--ScrollFrame:SetLayout("Flow")
 
 	ScrollGroup = AceGUI:Create("SimpleGroup")
-	frame:AddChild(ScrollGroup)
+	ClippyFrame:AddChild(ScrollGroup)
 	ScrollGroup:SetLayout("Fill")
 	ScrollTest = AceGUI:Create("ScrollFrame")
 	ScrollGroup:AddChild(ScrollTest)
@@ -114,7 +114,7 @@ local function InitializeClippyFrame()
 	PhraseButton:ClearAllPoints()
 	PhraseButton:SetPoint("LEFT")
 
-	MainButton:SetCallback("OnClick", function() ClickMain(ClippyFrame) end)
+	MainButton:SetCallback("OnClick", function() ClickMain() end)
 	PhraseButton:SetCallback("OnClick", ClickPhrase)
 
 	
