@@ -75,7 +75,7 @@ local function SelectGroup(container, event, group)
 end
 
 local function ClickMain()
-	ScrollGroup:Hide()
+	ScrollTest:Hide()
 end
 local function ClickPhrase()
 	--ScrollFrame = AceGUI:Create("Frame")
