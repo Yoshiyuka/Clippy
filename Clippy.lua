@@ -1,6 +1,8 @@
 local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0" );
 local AceGUI = LibStub("AceGUI-3.0")
 
+local MakeButtons
+
 local function DrawMainTab(container)
 	local desc = AceGUI:Create("Label")
 	desc:SetText("Main Tab")
@@ -74,9 +76,6 @@ local function SelectGroup(container, event, group)
 	end
 end
 
-local function ClickMain()
-	ScrollTest:Hide()
-end
 local function ClickPhrase()
 	--ScrollFrame = AceGUI:Create("Frame")
 	--ScrollFrame:SetTitle("Clippy")
@@ -91,15 +90,13 @@ local function ClickPhrase()
 	ScrollGroup:AddChild(ScrollTest)
 end
 
+local function ClickMain()
+	ClippyFrame:ReleaseChildren()
+	
+	MakeButtons()
+end
 
-local function InitializeClippyFrame()
-	ClippyFrame = AceGUI:Create("Frame")
-	ClippyFrame:SetTitle("Clippy")
-	ClippyFrame:SetHeight(768)
-	ClippyFrame:SetWidth(1024)
-	--ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
-    ClippyFrame:SetLayout("Flow")
-
+MakeButtons =  function ()
 	local MainButton = AceGUI:Create("Button") 
 	MainButton:SetText("Main")
 	MainButton:SetWidth(100)
@@ -109,18 +106,27 @@ local function InitializeClippyFrame()
 	PhraseButton:SetWidth(100)
 	PhraseButton:SetHeight(30)
 
-	MainButton:ClearAllPoints()
-	MainButton:SetPoint("TOPLEFT", 10, 10)
-	PhraseButton:ClearAllPoints()
-	PhraseButton:SetPoint("LEFT")
+	--MainButton:ClearAllPoints()
+	--MainButton:SetPoint("TOPLEFT", 10, 10)
+	--PhraseButton:ClearAllPoints()
+	--PhraseButton:SetPoint("LEFT")
 
 	MainButton:SetCallback("OnClick", function() ClickMain() end)
 	PhraseButton:SetCallback("OnClick", ClickPhrase)
-
-	
 	
 	ClippyFrame:AddChild(MainButton)
 	ClippyFrame:AddChild(PhraseButton)
+end
+
+local function InitializeClippyFrame()
+	ClippyFrame = AceGUI:Create("Frame")
+	ClippyFrame:SetTitle("Clippy")
+	ClippyFrame:SetHeight(768)
+	ClippyFrame:SetWidth(1024)
+	--ClippyFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+    ClippyFrame:SetLayout("Flow")
+
+	MakeButtons()
 	--ClippyFrame:AddChild(ScrollShit)
 
     --local TabGroup = AceGUI:Create("TabGroup")
