@@ -2,6 +2,7 @@ local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "Ace
 local AceGUI = LibStub("AceGUI-3.0")
 
 local MakeButtons
+local horrible_hack = false
 
 local function DrawMainTab(container)
 	local desc = AceGUI:Create("Label")
@@ -82,18 +83,21 @@ local function ClickPhrase()
 	--ScrollFrame:SetHeight(768)
 	--ScrollFrame:SetWidth(1024)
 	--ScrollFrame:SetLayout("Flow")
-
-	ScrollGroup = AceGUI:Create("SimpleGroup")
-	ClippyFrame:AddChild(ScrollGroup)
-	ScrollGroup:SetLayout("Fill")
-	ScrollTest = AceGUI:Create("ScrollFrame")
-	ScrollGroup:AddChild(ScrollTest)
+	if(horrible_hack ~= true) then
+		ScrollGroup = AceGUI:Create("SimpleGroup")
+		ClippyFrame:AddChild(ScrollGroup)
+		ScrollGroup:SetLayout("Fill")
+		ScrollTest = AceGUI:Create("ScrollFrame")
+		ScrollGroup:AddChild(ScrollTest)
+		horrible_hack = true
+	end
 end
 
 local function ClickMain()
 	ClippyFrame:ReleaseChildren()
 	
 	MakeButtons()
+	horrible_hack = false
 end
 
 MakeButtons =  function ()
