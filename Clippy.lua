@@ -87,7 +87,11 @@ local function ClickPhrase()
 		ScrollGroup = AceGUI:Create("SimpleGroup")
 		ClippyFrame:AddChild(ScrollGroup)
 		ScrollGroup:SetLayout("Fill")
+		ScrollGroup:SetWidth(768)
+		ScrollGroup:SetHeight(690)
 		ScrollTest = AceGUI:Create("ScrollFrame")
+		ScrollTest:SetWidth(250)
+		ScrollTest:SetLayout("Flow")
 		ScrollGroup:AddChild(ScrollTest)
 		horrible_hack = true
 	end
