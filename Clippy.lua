@@ -9,6 +9,7 @@ function Clippy:OnInitialize()
   	Clippy:RegisterChatCommand("clippy-remove", "RemoveSubstitute")
   	Clippy:RegisterChatCommand("clippy-clear", "ClearSubstitutes")
   	Clippy:RegisterChatCommand("clippy-replace", "ReplaceSubstitute")
+  	Clippy:RegisterChatCommand("clippy-index", "SubstituteIndex")
 end
 
 function Clippy:OnEnable()
@@ -28,8 +29,7 @@ function Clippy:ChatEdit_ParseText(chat, send)
 end
 
 function Clippy:ParseText(text)
-	print(substitutes[text])
-	return substitutes[text]
+	return (substitutes[text][math.random(#substitutes[text])])
 end
 
 function Clippy:Clippy()
@@ -68,4 +68,7 @@ function Clippy:ClearSubstitutes(arguments)
 end
 
 function Clippy:ReplaceSubstitute(arguments)
+end
+
+function Clippy:SubstituteIndex(arguments)
 end
