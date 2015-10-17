@@ -1,42 +1,42 @@
-local Clippy = LibStub("AceAddon-3.0"):NewAddon("Clippy", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0" );
+local Synonym = LibStub("AceAddon-3.0"):NewAddon("Synonym", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0" );
 
 local substitutes = {}
 
-function Clippy:OnInitialize()
+function Synonym:OnInitialize()
 	print("on init")
-	self.db = LibStub("AceDB-3.0"):New("ClippyDB")
+	self.db = LibStub("AceDB-3.0"):New("SynonymDB")
 	if(self.db.profile.substitutes ~= nil) then
 		print("db substitutes not nil. Loading.")
 		substitutes = self.db.profile.substitutes
 	else
 		print("db substitutes is nil. Ignoring.")
 	end
-  	Clippy:RegisterChatCommand("clippy", "Clippy")
-  	Clippy:RegisterChatCommand("clippy-new", "NewSubstitute")
-  	Clippy:RegisterChatCommand("clippy-add", "AddSubstitute")
-  	Clippy:RegisterChatCommand("clippy-remove", "RemoveSubstitute")
-  	Clippy:RegisterChatCommand("clippy-clear", "ClearSubstitutes")
-  	Clippy:RegisterChatCommand("clippy-replace", "ReplaceSubstitute")
-  	Clippy:RegisterChatCommand("clippy-index", "SubstituteIndex")
+  	Synonym:RegisterChatCommand("synonym", "Synonym")
+  	Synonym:RegisterChatCommand("synonym-new", "NewSubstitute")
+  	Synonym:RegisterChatCommand("synonym-add", "AddSubstitute")
+  	Synonym:RegisterChatCommand("synonym-remove", "RemoveSubstitute")
+  	Synonym:RegisterChatCommand("synonym-clear", "ClearSubstitutes")
+  	Synonym:RegisterChatCommand("synonym-replace", "ReplaceSubstitute")
+  	Synonym:RegisterChatCommand("synonym-index", "SubstituteIndex")
 end
 
-function Clippy:OnEnable()
+function Synonym:OnEnable()
 	print("On Enable")
-    Clippy:SecureHook("ChatEdit_ParseText")
+    Synonym:SecureHook("ChatEdit_ParseText")
 end
 
-function Clippy:OnLoad()
+function Synonym:OnLoad()
 	print("On Load")
 	if(self.db.profile.substitutes ~= nil) then
 		substitutes = self.db.profile.substitutes
 	end
 end
 
-function Clippy:OnDisable()
+function Synonym:OnDisable()
 	self.db.profile.substitutes = substitutes
 end
 
-function Clippy:ChatEdit_ParseText(chat, send)
+function Synonym:ChatEdit_ParseText(chat, send)
 	if(send == 1) then
 		local old_text = chat:GetText()
 		local new_text = string.gsub(old_text, "{(.-)}", function(s) return self:ParseText(s) end)
@@ -44,7 +44,7 @@ function Clippy:ChatEdit_ParseText(chat, send)
 	end
 end
 
-function Clippy:ParseText(text)
+function Synonym:ParseText(text)
 	if(substitutes[text] ~= nil) then
 		return (substitutes[text][math.random(#substitutes[text])])
 	else
@@ -52,11 +52,11 @@ function Clippy:ParseText(text)
 	end
 end
 
-function Clippy:Clippy()
+function Synonym:Synonym()
 end
 
-function Clippy:NewSubstitute(arguments)
-	local name, default = Clippy:GetArgs(arguments, 2)
+function Synonym:NewSubstitute(arguments)
+	local name, default = Synonym:GetArgs(arguments, 2)
 	if(substitutes[name] == nil) then
 		print("Setting " .. name .. " in substitutes table with default substitution of: " .. default)
 		substitutes[name] = {default}
@@ -66,23 +66,23 @@ function Clippy:NewSubstitute(arguments)
 	end
 end
 
-function Clippy:AddSubstitute(arguments)
-	local name, sub = Clippy:GetArgs(arguments, 2)
+function Synonym:AddSubstitute(arguments)
+	local name, sub = Synonym:GetArgs(arguments, 2)
 	if(substitutes[name] ~= nil) then
 		print("Adding " .. sub .. " to potential substitutes for " .. name)
 		table.insert(substitutes[name], sub)
 		table.insert(self.db.profile.substitutes[name], sub)
 	else
 		print(name .. " is not an existing substitute table. Creating a new table for " .. name)
-		Clippy:NewSubstitute(arguments)
+		Synonym:NewSubstitute(arguments)
 	end
 end
 
-function Clippy:RemoveSubstitute(arguments)
+function Synonym:RemoveSubstitute(arguments)
 end
 
-function Clippy:ClearSubstitutes(arguments)
-	name = Clippy:GetArgs(arguments, 1)
+function Synonym:ClearSubstitutes(arguments)
+	name = Synonym:GetArgs(arguments, 1)
 
 	for k in pairs(substitutes[name]) do
 		substitutes[name][k] = nil
@@ -94,8 +94,8 @@ function Clippy:ClearSubstitutes(arguments)
 	self.db.profile.substitutes[name] = nil
 end
 
-function Clippy:ReplaceSubstitute(arguments)
+function Synonym:ReplaceSubstitute(arguments)
 end
 
-function Clippy:SubstituteIndex(arguments)
+function Synonym:SubstituteIndex(arguments)
 end

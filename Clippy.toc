@@ -1,9 +1,9 @@
 ## Interface: 60200
-## Title: Clippy
+## Title: Synonym
 ## Version: 0.1
 ## Author: Yoshiyuka
 ## OptionalDeps: Ace3, AceConsole-3.0, AceEvent-3.0, AceHook-3.0, AceGUI-3.0, AceConfig-3.0, LibTextTable-1.1
-## SavedVariables: ClippyDB
+## SavedVariables: SynonymDB
 
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua
@@ -21,4 +21,4 @@ Libs\LibTextTable-1.1\Lib.xml
 #@end-no-lib-strip@
 
 
-Clippy.lua
+Synonym.lua
