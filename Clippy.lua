@@ -29,15 +29,14 @@ function Clippy:ChatEdit_ParseText(chat, send)
 end
 
 function Clippy:ParseText(text)
-	return (substitutes[text][math.random(#substitutes[text])])
+	if(#substitutes[text] > 0) then
+		return (substitutes[text][math.random(#substitutes[text])])
+	else
+		return text
+	end
 end
 
 function Clippy:Clippy()
-	if(ClippyFrame:IsVisible()) then
-		ClippyFrame:Hide()
-	else
-		ClippyFrame:Show()
-	end
 end
 
 function Clippy:NewSubstitute(arguments)
@@ -65,6 +64,11 @@ function Clippy:RemoveSubstitute(arguments)
 end
 
 function Clippy:ClearSubstitutes(arguments)
+	name = Clippy:GetArgs(arguments, 1)
+
+	for k in pairs(substitutes[name]) do
+		substitutes[name][k] = nil
+	end
 end
 
 function Clippy:ReplaceSubstitute(arguments)
