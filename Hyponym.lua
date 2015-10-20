@@ -54,7 +54,8 @@ function Hyponym:OnInitialize()
   	Hyponym:RegisterChatCommand("hyponym-remove", "RemoveSubstitute")
   	Hyponym:RegisterChatCommand("hyponym-clear", "ClearSubstitutes")
   	Hyponym:RegisterChatCommand("hyponym-replace", "ReplaceSubstitute")
-  	Hyponym:RegisterChatCommand("hyponym-index", "IndexSubstitute")
+  	Hyponym:RegisterChatCommand("hyponym-index", "SubstituteIndex")
+  	Hyponym:RegisterChatCommand("hyponym-list", "ListSubstitutes")
   	Hyponym:RegisterChatCommand("hyponym-invert", "Invert")
 end
 
@@ -154,7 +155,7 @@ end
 function Hyponym:ReplaceSubstitute(arguments)
 end
 
-function Hyponym:IndexSubstitute(arguments)
+function Hyponym:SubstituteIndex(arguments)
 	local name, sub = Hyponym:GetArgs(arguments, 2)
 
 	if(substitutes_cache[name] ~= nil) then
@@ -169,4 +170,13 @@ function Hyponym:IndexSubstitute(arguments)
 
 	print("Hyponym-Error: " .. name .. " has no hyponyms.")
 	return nil
+end
+
+function Hyponym:ListSubstitutes(arguments)
+	local name = Hyponym:GetArgs(arguments, 1)
+	if(substitutes[name] ~= nil) then
+		table.print(substitutes[name])
+	else
+		print("Hyponym-Error: " .. name .. " has no substitutes to list.")
+	end
 end
