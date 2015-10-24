@@ -59,6 +59,14 @@ function Hyponym:OnInitialize()
   	Hyponym:RegisterChatCommand("hyponym-invert", "Invert")
 end
 
+function Hyponym:Hyponym()
+	print("Usage:")
+	print("/hyponym-new [name] <text> \t- Create a new substitution (text) for keyword (name).")
+	print("/hyponym-add [name] <text> \t- Add a substitution (text) to existing keyword (name). Calls hyponym-new if keyword doesn't exist yet.")
+	print("/hyponym-remove [name] [index] \t- Remove specific substution by index from list of substutions for keyword (name)")
+	print("/hyponym-clear [name] \t- Delete all substutions for keyword (name)")
+end
+
 function Hyponym:Invert()
 	for k, v in pairs(substitutes) do
 		for i,value in ipairs(v) do
@@ -103,9 +111,6 @@ function Hyponym:ParseText(text)
 	else
 		return text
 	end
-end
-
-function Hyponym:Hyponym()
 end
 
 function Hyponym:NewSubstitute(arguments)
